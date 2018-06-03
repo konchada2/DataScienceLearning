@@ -9,7 +9,13 @@
    * String
    * Printing
 * Operators
+   - Arithmetic Operators
+   - Relational Operators
+   - Logical Operators
+   - Membership Operators
 * if,elif and else statements
+* Range and input functions
 * For loops
 * While loops
-* List Comprehension
+* List Comprehension 
+* Functions 

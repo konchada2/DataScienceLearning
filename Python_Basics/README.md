@@ -13,6 +13,7 @@
    - Relational Operators
    - Logical Operators
    - Membership Operators
+* File Operations
 * if,elif and else statements
 * Range and input functions
 * For loops

@@ -1,0 +1,13 @@
+feature,type
+Gender,Categorical
+Married,Categorical
+Dependents,Categorical
+Education,Categorical
+Self_Employed,Categorical
+ApplicantIncome,Continuous
+CoapplicantIncome,Continuous
+LoanAmount,Continuous
+Loan_Amount_Term,Continuous
+Credit_History,Categorical
+Property_Area,Categorical
+Loan_Status,Categorical

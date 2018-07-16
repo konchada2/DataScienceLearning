@@ -1,9 +1,10 @@
 # Bokeh web application on Gapminder
 
-Install Bokeh
+- Install Bokeh
 
+```
 pip install bokeh
-
+```
 Steps to execute
 
 - Navigate to the working directory using command/anaconda prompt where the file is stored ("gapminder.ipynd")

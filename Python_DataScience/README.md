@@ -23,5 +23,7 @@
     * Coding nominal data
     * Iterating over rows of dataframe
     * Plotting Boxplot & Histogram
+    * Joins, group by, aggregate functions and filtering
+    * Concating, reshaping 
 * Matplotlib
  

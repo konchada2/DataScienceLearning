@@ -10,6 +10,6 @@ Steps to execute
 
 Follow this [link](http://www.watchingthenet.com/how-to-navigate-through-folders-when-using-windows-command-prompt.html) if you need help to navigate to the current folder
 
-- type "bokeh serve gapminder.ipynd" 
+- type "bokeh serve gapminder.ipynb" 
 
-- go to "http://localhost: 5006/gapminder" to interact with the application 
+- go to "http://localhost:5006/gapminder" to interact with the application 

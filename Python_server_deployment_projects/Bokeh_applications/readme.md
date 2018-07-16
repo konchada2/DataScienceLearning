@@ -5,7 +5,8 @@
 ```
 pip install bokeh
 ```
-Steps to execute
+
+## Instructions to Execute
 
 - Navigate to the working directory using command/anaconda prompt where the file is stored ("gapminder.ipynd")
 
@@ -14,3 +15,7 @@ Follow this [link](http://www.watchingthenet.com/how-to-navigate-through-folders
 - type 'bokeh serve gapminder.ipynb' 
 
 - go to "http://localhost:5006/gapminder" to interact with the application 
+
+## Built with
+
+* [Bokeh](https://bokeh.pydata.org/en/latest/) - Interactive python visualization library for web browser presentations

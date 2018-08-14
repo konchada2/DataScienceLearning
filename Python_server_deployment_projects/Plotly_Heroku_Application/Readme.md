@@ -14,13 +14,13 @@ open git bash and navigate to the directory where the data file is present using
 To list the files present in the folder:
 
 ```
-ls
+$ ls
 ```
 
 To view the column names of a file:
 
 ```
-awk  ‘FNR  == 1 {print}’ filename
+$ awk  ‘FNR  == 1 {print}’ filename
 ```
-
+So for our data file it should be * $ awk 'FNR == 1 {print} CA_cleaned.csv*. Note the column numbers of the file. 
 

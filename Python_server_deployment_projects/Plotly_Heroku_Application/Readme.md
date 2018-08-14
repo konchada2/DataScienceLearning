@@ -45,7 +45,6 @@ wc -l < filename
 ```
 So for example *wc -l < CA_data.csv*. It will display the count as 31778516.
 
-```
-__Note__: You can use "\t" as a delimiter when dealing with text file
-```
+
+**Note**: You can use "\t" as a delimiter when dealing with text file
 

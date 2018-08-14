@@ -36,6 +36,6 @@ To select multiple columns of a file and save it into new file:
 ```
 cut -d ‘,’ -f 2,3,4-6 inputfilename > outputfilename 
 ```
-So for example *cut -d ',' -f 3,4,6,10,12,14,16,17,19-22 CA_cleaned.csv > CA_data.csv*. These are columns which are most important for the analysis.
+So for example *cut -d ',' -f 3,4,6,10,12,14,16,17,19-22  CA_cleaned.csv > CA_data.csv*. These are columns which are most important for the analysis. It will take some time and you will find the new data file in the same folder, with a reduced file size of 2.5 GB.
 
 

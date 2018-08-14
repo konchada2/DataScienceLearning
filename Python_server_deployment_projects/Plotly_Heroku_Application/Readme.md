@@ -53,12 +53,12 @@ $ awk –F  ‘<delimiter>’  ‘{print $1}’ filename | head
 ```
 So for example *awk -F ',' '{print $1}' CA_data.csv | head*. It will display the 1st 10 records of stop date column as it is the 1st column in the newly created file.
 
-**To filter file based on a date type column:
+**To filter file based on a date type column:**
 
 ```
 $ awk -F '<delimiter>' '{<pattern - column_number>} condition' filename
 ```
-So for example *awk -F ‘,’  ‘{split($1, d, /[/]/)} d[3] >= “2014” ‘  CA_data.csv*. As the 1st column is stop date on which we need to filter the entire file. We 1st need to split the date field columns and apply conditional filter. For our analysis data after 2014 should be good enough.
+So for example *awk -F ‘,’  ‘{split($1, d, /[/ ]/)} d[3] >= “2014” ‘  CA_data.csv*. As the 1st column is stop date on which we need to filter the entire file. We 1st need to split the date field columns and apply conditional filter. For our analysis data after 2014 should be good enough.
 
 
 **Note**: You can use "\t" as a delimiter when dealing with a text file. 

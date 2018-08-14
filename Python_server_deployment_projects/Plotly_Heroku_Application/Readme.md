@@ -45,6 +45,15 @@ wc -l < filename
 ```
 So for example *wc -l < CA_data.csv*. It will display the count as 31778516.
 
+To display 1st 10 records of a file:
+
+```
+# Displays 1st 10 records of the first column of a file
+awk –F  ‘,’  ‘{print $1}’ filename | head
+```
+So for example *awk -F ',' '{print $1}' CA_data.csv | head*. It will display the 1st 10 records of stop date column as it is the 1st column in the newly created file.
+
+
 
 **Note**: You can use "\t" as a delimiter when dealing with a text file. 
 

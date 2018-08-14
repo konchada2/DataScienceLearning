@@ -38,4 +38,13 @@ cut -d ‘,’ -f 2,3,4-6 inputfilename > outputfilename
 ```
 So for example *cut -d ',' -f 3,4,6,10,12,14,16,17,19-22  CA_cleaned.csv > CA_data.csv*. These are columns which are most important for the analysis. It will take some time and you will find the new data file in the same folder, with a reduced file size of 2.5 GB.
 
+To count the number of records in a file:
+
+```
+wc -l < filename
+```
+So for example *wc -l < CA_data.csv*. It will display the count as 31778516.
+
+
+
 

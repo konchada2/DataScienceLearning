@@ -60,6 +60,8 @@ $ awk -F '<delimiter>' '{<pattern - column_number>} condition' filename
 ```
 So for example *awk -F ‘,’  ‘{split($1, d, /[/ ]/)} d[1] >= “2014” ‘  CA_data.csv > CA_final.csv*. As the 1st column is stop date on which we need to filter the entire file. We 1st need to split the date field columns and apply conditional filter. For our analysis data after 2014 should be good enough.
 
+The CA_final.csv that is produced will be of size 0.8 GB and will have 10107595 records, which is still very large data.
+
 
 **Note**: You can use "\t" as a delimiter when dealing with a text file. 
 

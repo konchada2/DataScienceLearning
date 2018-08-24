@@ -5,3 +5,10 @@ A class is a collection of similar objects and is a logical entity which doesn't
 
 ### 2. What is an object?
 An object is an instance of a class and is a physical entity which has an allocated memory when created.
+
+### 3. What is inheritance?
+
+
+### 4. What is polymorphism?
+
+

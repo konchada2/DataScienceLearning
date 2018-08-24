@@ -7,3 +7,4 @@ Below are some of the important topics in order to be successful in a data scien
 - [Python](#Python-Interview-Questions)
 - [Machine Learning](#Machine-Learning-Interview-Questions)
 - [Software Engineering](#Software-Engineering-Questions)
+- [Tableau](#Tableau-Interview-Questions)

@@ -1,9 +1,31 @@
 # SQL Interview Questions
+### 1. What are the common commands in SQL?
+- Select
+- Insert
+- Delete
+- Update
+- Where
 
-### 1. What is the query order of execution?
+### 2. What is the query order of execution?
 From & Joins -> Where -> Group By -> Having -> Select -> Distinct -> Order By -> Limit/Offset
 
-### 2. what is the differenc between having and where clause? 
+### 3. what is the difference between having and where clause? 
+
+### 4. What are different types of joins?
+
+### 5. How does inner join work?
+
+### 6. Difference between inner and left join?
+
+### 7. How does outer join work?
+
+### 8. Give a scenario where inner join works the same as outer join?
+
+### 9. What is a self join?
+
+### 10. Advantages and diadvantages of self join?
+
+
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------

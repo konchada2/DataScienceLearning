@@ -27,14 +27,35 @@ From & Joins -> Where -> Group By -> Having -> Select -> Distinct -> Order By ->
 
 
 ### 11. What is a primary key?
- A __primary key__ is a field in a database table that is used to uniquely identify records.
+ A __primary key__ is a field in a database table that is used to uniquely identify records. It is a must in a table.
  
 ### 12. What is a foreign key?
- A __foreign key__ is a primary key from one table that shows up as column/field in another table where there is a relation between the tables.
+ A __foreign key__ is a primary key from one table that shows up as column/field in another table where there is a relation between the tables. There can be several foreign keys.
  
 ### 13. What is normalization?
-It is the process of organizing the columns using attributes(Foreign or primary key) and tables using their relationships to minimize data redundancy. 
+It is the process of organizing the columns using attributes(Foreign or primary key) and tables using their relationships to minimize data redundancy. Normalization is used to break the tables into smaller tables to avoid redundancy without losing information. It is used to improve the performance and bring the database to consistent state. There are 3 main normals forms:
 
+- __1NF__ : Eliminates repeating groups of entities into individual tables. An entity referes to a person or place or a thing. (Remove duplicates)
+- __2NF__: Create seperate tables for set of values that apply to mutiple records.
+- __3NF__: Eliminate fields that does not depend on the primary key.
+
+### 14. What is the use of case expressions?
+To substitute stored database values with our own values in the output results. 
+```
+select 
+CASE columnname
+     WHEN <condition1> THEN <Result1>
+     WHEN <condition2> THEN <Result3>
+     ELSE <Results3>
+END AS New_columnname
+FROM Table;     
+```
+### 15. What are views? What are the advantages of using view?
+Views are virtual tables based on the results of a SQL Query. 
+Advantages of views are:
+- Combine one or more tables into one
+- Security mechanism (To hide sensitive information by not selecting those columns while creating)
+- Data in a view is always current (Upto date)
 
 
 

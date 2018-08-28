@@ -56,7 +56,11 @@ Advantages of views are:
 - Combine one or more tables into one
 - Security mechanism (To hide sensitive information by not selecting those columns while creating)
 - Data in a view is always current (Upto date)
-
+```
+Create View as schema.viewname
+as
+<SQL QUERY>
+```
 
 
 

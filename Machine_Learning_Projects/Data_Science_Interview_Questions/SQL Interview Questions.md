@@ -26,6 +26,18 @@ From & Joins -> Where -> Group By -> Having -> Select -> Distinct -> Order By ->
 ### 10. Advantages and diadvantages of self join?
 
 
+### 11. What is a primary key?
+ A __primary key__ is a field in a database table that is used to uniquely identify records.
+ 
+### 12. What is a foreign key?
+ A __foreign key__ is a primary key from one table that shows up as column/field in another table where there is a relation between the tables.
+ 
+### 13. What is normalization?
+It is the process of organizing the columns using attributes(Foreign or primary key) and tables using their relationships to minimize data redundancy. 
+
+
+
+
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------

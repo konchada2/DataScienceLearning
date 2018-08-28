@@ -45,7 +45,7 @@ To substitute stored database values with our own values in the output results.
 select 
 CASE columnname
      WHEN <condition1> THEN <Result1>
-     WHEN <condition2> THEN <Result3>
+     WHEN <condition2> THEN <Result2>
      ELSE <Results3>
 END AS New_columnname
 FROM Table;     

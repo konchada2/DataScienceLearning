@@ -9,13 +9,35 @@
 ### 2. What is the query order of execution?
 From & Joins -> Where -> Group By -> Having -> Select -> Distinct -> Order By -> Limit/Offset
 
-### 3. what is the difference between having and where clause? 
+### 3. Explain Where clause?
+__Where__ clause is used to filter records. It is used in combination to:
+- Equality filter (=, <>, <=, >= ``` Where Gender = 'M' ```, ``` Where class <> 2 ```)
+- Basic Comparison (<,> ``` Where score < 60```)
+- Logical Comparison (AND - ```Where Type = 'A' AND Score > 75```, OR - ```Where Type = 'A' OR Type = 'B' ```, IN - ``` Where FirstName IN ('Tom', 'Dick', 'Harry')```, BETWEEN - ```Where Score Between 40 AND 80``` )
+- String Comparison (Like - ```Where JobTitle Like '%Data%' ```, NOT Like - ```Where Name NOT Like '_ary' ```, wild cards - '%')
+- NULL Comparison (```Where size is NULL```, ```Where Gender is NOT NULL```)
 
-### 4. What are different types of joins?
+### 4. what is the difference between having and where clause? 
 
-### 5. How does inner join work?
+### 5. Why do we use joins?
+We use joins to combine rows from two or more related tables and present as one output result.
 
-### 6. Difference between inner and left join?
+### 6. What are different types of joins?
+- Inner Join
+- Left Join
+- Right Join
+- Outer Join
+
+### 7. How does inner join work?
+It is used to select rows where participating tables have identical columns.
+```
+select A.colA, B.colA
+FROM Table A 
+inner join Table B
+on A.colA = B.colA
+```
+
+### 7. Difference between inner and left join?
 
 ### 7. How does outer join work?
 
@@ -50,17 +72,9 @@ CASE columnname
 END AS New_columnname
 FROM Table;     
 ```
-### 15. What are views? What are the advantages of using view?
-Views are virtual tables based on the results of a SQL Query. 
-Advantages of views are:
-- Combine one or more tables into one
-- Security mechanism (To hide sensitive information by not selecting those columns while creating)
-- Data in a view is always current (Upto date)
-```
-Create View as schema.viewname
-as
-<SQL QUERY>
-```
+### 15. What is GO command?
+__Go__ command is recognised by SSMS and is not a T-SQL Statement. It is used as signal to perform a task. It can not occupy the same line as a T-SQL statement. 
+
 
 
 
@@ -108,6 +122,18 @@ To execute a Stored procedure simply select the name of the SP and click on run 
 
 ### 5. What is a trigger?
 
+### 6. What are views? What are the advantages of using view?
+Views are virtual tables based on the results of a SQL Query. 
+Advantages of views are:
+- Combine one or more tables into one
+- Security mechanism (To hide sensitive information by not selecting those columns while creating)
+- Data in a view is always current (Upto date)
+```
+Create View as schema.viewname
+as
+<SQL QUERY>
+```
+
 ----------------------------------------------------------------------------------------------------------------------------
 SQL Problems
 
@@ -129,3 +155,4 @@ from table A
 group by Col_A
 having count_of_values > 1
 ```
+

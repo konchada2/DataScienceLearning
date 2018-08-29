@@ -85,8 +85,22 @@ Indexing
 Stored Procedure, Functions and Triggers
 
 ### 1. What is a stored procedure and when do we use? What is the usage in run time?
+__Stored procedure__ consists of 1 or more T-SQL queries which are stored for future re-usage. 
+They reduce network traffic and improve performance as they are already stored on server. They also provide security by applying permissions to few settings and are easier to maintain as they are stored at one place only. They are also used to accept incoming parameters and return values. 
 
-### 2. Where ia stored procedure located
+There are 3 types of stored procedure:
+- User-defined: Defined by user
+- temporary: SP stored in tempdb
+- system: SP used by database engine which should not be interfered. 
+
+```
+Create Proc <SP_name>
+as
+<SQL QUERY>
+```
+To execute a Stored procedure simply select the name of the SP and click on run or type ``` Execute <SP_name>```
+
+### 2. Where is a stored procedure located
 
 ### 3. What is a function?
 

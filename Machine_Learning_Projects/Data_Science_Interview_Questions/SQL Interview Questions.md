@@ -1,4 +1,5 @@
 # SQL Interview Questions
+
 ### 1. What are the common commands in SQL?
 - Select
 - Insert
@@ -121,7 +122,7 @@ Where <condition>
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------
-Indexing
+## Indexing
 
 ### 1. What is an index? What are the types of index and why do we use indexes?
 
@@ -136,8 +137,7 @@ Indexing
 ### 6. Can we do indexing if we have null values?
 
 ----------------------------------------------------------------------------------------------------------------------------------------
-
-Stored Procedure, Functions and Triggers
+## Stored Procedure, Functions and Triggers
 
 ### 1. What is a stored procedure and when do we use? What is the usage in run time?
 __Stored procedure__ consists of 1 or more T-SQL queries which are stored for future re-usage. 
@@ -176,7 +176,7 @@ as
 ```
 
 ----------------------------------------------------------------------------------------------------------------------------
-SQL Problems
+## SQL Problems
 
 ### 1. Explain the output of the following query:
 ```

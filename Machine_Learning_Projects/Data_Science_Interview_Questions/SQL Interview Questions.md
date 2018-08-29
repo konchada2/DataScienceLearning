@@ -1,5 +1,7 @@
 # SQL Interview Questions
 
+## T-SQL 
+
 ### 1. What are the common commands in SQL?
 - Select
 - Insert
@@ -196,4 +198,18 @@ from table A
 group by Col_A
 having count_of_values > 1
 ```
+----------------------------------------------------------------------------------------------------------------------------------------
+## SQL Server Integration Sevices (SSIS)
+
+### 1. What is SSIS? What is it used for?
+It is a platform for building enterprise level data integration and data transformation solutions. It consists rich set of built-in tasks and transformation tools that are used for integrating packages
+
+It is used for:
+- solving complex business problems by copying and downloading files, emails 
+- Updating data warehouses
+- Cleaning and mining data
+- Managing SQL server objects and data
+- Extracting and transforming data from various sources ex: XML, flat files
+
+SQL server Data tools (SSDT) will install the business intelligence templates inside visual studio that is where we can access SSIS from.
 

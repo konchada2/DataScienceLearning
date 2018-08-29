@@ -17,18 +17,41 @@ __Where__ clause is used to filter records. It is used in combination to:
 - String Comparison (Like - ```Where JobTitle Like '%Data%' ```, NOT Like - ```Where Name NOT Like '_ary' ```, wild cards - '%')
 - NULL Comparison (```Where size is NULL```, ```Where Gender is NOT NULL```)
 
-### 4. what is the difference between having and where clause? 
+### 4. What are aggregate functions?
+__Aggregate functions__ are used to calculate values in a T-SQL query and returns a single result value. We can use multiple aggregate functions at once as well.
+- Count()
+- Avg()
+- Max()
+- Min()
+- Sum()
 
-### 5. Why do we use joins?
+```
+Select COUNT(DISTINCT JobTitle) as 'Num_JobTitles' 
+FROM Employee
+```
+### 5. What is group by clause?
+__Group By__ clause is used in combination with aggregate function to group returned query output.
+```
+select city, count(*) as 'total_Count_city'
+From Address
+Group By City
+```
+The query will return the count of each distinct city. 
+
+__Note__: To find the unique records in atable we can use group by instead of distinct. 
+
+### 6. what is the difference between having and where clause? 
+
+### 7 . Why do we use joins?
 We use joins to combine rows from two or more related tables and present as one output result.
 
-### 6. What are different types of joins?
+### 8. What are different types of joins?
 - Inner Join
 - Left Join
 - Right Join
 - Outer Join
 
-### 7. How does inner join work?
+### 9. How does inner join work?
 It is used to select rows where participating tables have identical columns.
 ```
 select A.colA, B.colA
@@ -37,31 +60,31 @@ inner join Table B
 on A.colA = B.colA
 ```
 
-### 7. Difference between inner and left join?
+### 10. Difference between inner and left join?
 
-### 7. How does outer join work?
+### 11. How does outer join work?
 
-### 8. Give a scenario where inner join works the same as outer join?
+### 12. Give a scenario where inner join works the same as outer join?
 
-### 9. What is a self join?
+### 13. What is a self join?
 
-### 10. Advantages and diadvantages of self join?
+### 14. Advantages and diadvantages of self join?
 
 
-### 11. What is a primary key?
+### 15. What is a primary key?
  A __primary key__ is a field in a database table that is used to uniquely identify records. It is a must in a table.
  
-### 12. What is a foreign key?
+### 16. What is a foreign key?
  A __foreign key__ is a primary key from one table that shows up as column/field in another table where there is a relation between the tables. There can be several foreign keys.
  
-### 13. What is normalization?
+### 17. What is normalization?
 It is the process of organizing the columns using attributes(Foreign or primary key) and tables using their relationships to minimize data redundancy. Normalization is used to break the tables into smaller tables to avoid redundancy without losing information. It is used to improve the performance and bring the database to consistent state. There are 3 main normals forms:
 
 - __1NF__ : Eliminates repeating groups of entities into individual tables. An entity referes to a person or place or a thing. (Remove duplicates)
 - __2NF__: Create seperate tables for set of values that apply to mutiple records.
 - __3NF__: Eliminate fields that does not depend on the primary key.
 
-### 14. What is the use of case expressions?
+### 18. What is the use of case expressions?
 To substitute stored database values with our own values in the output results. 
 ```
 select 
@@ -72,8 +95,26 @@ CASE columnname
 END AS New_columnname
 FROM Table;     
 ```
-### 15. What is GO command?
+### 19. What is GO command?
 __Go__ command is recognised by SSMS and is not a T-SQL Statement. It is used as signal to perform a task. It can not occupy the same line as a T-SQL statement. 
+
+### 20. What are the commands to modify data?
+- Insert 
+``` 
+Insert into <schema>.<tablename> ([ColA], [ColB])
+Values ('A', 'B') 
+```
+- Update 
+``` 
+Update <schema>.<tablename> 
+Set ColA = 'Value'
+Where <condition> 
+```
+- Delete 
+``` 
+Delete from <schema>.<tablename> 
+Where <condition> 
+```
 
 
 

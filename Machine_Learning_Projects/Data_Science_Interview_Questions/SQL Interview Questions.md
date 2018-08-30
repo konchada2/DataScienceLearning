@@ -9,10 +9,21 @@
 - Update
 - Where
 
-### 2. What is the query order of execution?
+### 2. What are DDL (Data Definition Language) commands?
+- Create
+- Alter 
+- Drop
+
+### 3. What are DML (Data Manipulation Language) commands?
+- Select
+- Insert
+- Delete
+- Update
+
+### 4. What is the query order of execution?
 From & Joins -> Where -> Group By -> Having -> Select -> Distinct -> Order By -> Limit/Offset
 
-### 3. Explain Where clause?
+### 5. Explain Where clause?
 __Where__ clause is used to filter records. It is used in combination to:
 - Equality filter (=, <>, <=, >= ``` Where Gender = 'M' ```, ``` Where class <> 2 ```)
 - Basic Comparison (<,> ``` Where score < 60```)
@@ -20,7 +31,7 @@ __Where__ clause is used to filter records. It is used in combination to:
 - String Comparison (Like - ```Where JobTitle Like '%Data%' ```, NOT Like - ```Where Name NOT Like '_ary' ```, wild cards - '%')
 - NULL Comparison (```Where size is NULL```, ```Where Gender is NOT NULL```)
 
-### 4. What are aggregate functions?
+### 6. What are aggregate functions?
 __Aggregate functions__ are used to calculate values in a T-SQL query and returns a single result value. We can use multiple aggregate functions at once as well.
 - Count()
 - Avg()
@@ -32,7 +43,7 @@ __Aggregate functions__ are used to calculate values in a T-SQL query and return
 Select COUNT(DISTINCT JobTitle) as 'Num_JobTitles' 
 FROM Employee
 ```
-### 5. What is group by clause?
+### 7. What is group by clause?
 __Group By__ clause is used in combination with aggregate function to group returned query output.
 ```
 select city, count(*) as 'total_Count_city'
@@ -42,6 +53,9 @@ Group By City
 The query will return the count of each distinct city. 
 
 __Note__: To find the unique records in atable we can use group by instead of distinct. 
+
+### 8. Explain order by clause ?
+__Order by__ clause is used to sort the final output result data set. It always comes at the end of slect statement. We can use column alias and column numbers in order by clause. When we are dealing with multiple columns we can sort both of them in ascending and descending order.   
 
 ### 6. what is the difference between having and where clause? 
 

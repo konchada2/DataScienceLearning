@@ -57,18 +57,18 @@ __Note__: To find the unique records in atable we can use group by instead of di
 ### 8. Explain order by clause ?
 __Order by__ clause is used to sort the final output result data set. It always comes at the end of slect statement. We can use column alias and column numbers in order by clause. When we are dealing with multiple columns we can sort both of them in ascending and descending order.   
 
-### 6. what is the difference between having and where clause? 
+### 9. what is the difference between having and where clause? 
 
-### 7 . Why do we use joins?
+### 10. Why do we use joins?
 We use joins to combine rows from two or more related tables and present as one output result.
 
-### 8. What are different types of joins?
+### 11. What are different types of joins?
 - Inner Join
 - Left Join
 - Right Join
 - Outer Join
 
-### 9. How does inner join work?
+### 12. How does inner join work?
 It is used to select rows where participating tables have identical columns.
 ```
 select A.colA, B.colA
@@ -77,31 +77,31 @@ inner join Table B
 on A.colA = B.colA
 ```
 
-### 10. Difference between inner and left join?
+### 13. Difference between inner and left join?
 
-### 11. How does outer join work?
+### 14. How does outer join work?
 
-### 12. Give a scenario where inner join works the same as outer join?
+### 15. Give a scenario where inner join works the same as outer join?
 
-### 13. What is a self join?
+### 16. What is a self join?
 
-### 14. Advantages and diadvantages of self join?
+### 17. Advantages and diadvantages of self join?
 
 
-### 15. What is a primary key?
+### 18. What is a primary key?
  A __primary key__ is a field in a database table that is used to uniquely identify records. It is a must in a table.
  
-### 16. What is a foreign key?
+### 19. What is a foreign key?
  A __foreign key__ is a primary key from one table that shows up as column/field in another table where there is a relation between the tables. There can be several foreign keys.
  
-### 17. What is normalization?
+### 20. What is normalization?
 It is the process of organizing the columns using attributes(Foreign or primary key) and tables using their relationships to minimize data redundancy. Normalization is used to break the tables into smaller tables to avoid redundancy without losing information. It is used to improve the performance and bring the database to consistent state. There are 3 main normals forms:
 
 - __1NF__ : Eliminates repeating groups of entities into individual tables. An entity referes to a person or place or a thing. (Remove duplicates)
 - __2NF__: Create seperate tables for set of values that apply to mutiple records.
 - __3NF__: Eliminate fields that does not depend on the primary key.
 
-### 18. What is the use of case expressions?
+### 21. What is the use of case expressions?
 To substitute stored database values with our own values in the output results. 
 ```
 select 
@@ -112,10 +112,10 @@ CASE columnname
 END AS New_columnname
 FROM Table;     
 ```
-### 19. What is GO command?
+### 22. What is GO command?
 __Go__ command is recognised by SSMS and is not a T-SQL Statement. It is used as signal to perform a task. It can not occupy the same line as a T-SQL statement. 
 
-### 20. What are the commands to modify data?
+### 23. What are the commands to modify data?
 - Insert 
 ``` 
 Insert into <schema>.<tablename> ([ColA], [ColB])

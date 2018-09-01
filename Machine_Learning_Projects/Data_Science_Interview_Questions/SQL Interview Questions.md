@@ -230,7 +230,7 @@ SQL server Data tools (SSDT) will install the business intelligence templates in
 ### 2. What is a SSIS package?
 A package is an organized collection of connnections, control flows elements, data flow elements, event handlers, variables, parameters and configuration assembled when a new integration project is created. 
 
-### 3. Explain the workflow ETL in SSIS?
+### 3. Explain the workflow of ETL using SSIS?
 - Add and configure flat file configuration manager
 - Add and configure OLE DB configuration manager
 - Add a Data flow task to package

@@ -227,3 +227,14 @@ It is used for:
 
 SQL server Data tools (SSDT) will install the business intelligence templates inside visual studio that is where we can access SSIS from.
 
+### 2. What is a SSIS package?
+A package is an organized collection of connnections, control flows elements, data flow elements, event handlers, variables, parameters and configuration assembled when a new integration project is created. 
+
+### 3. Explain the workflow ETL in SSIS?
+- Add and configure flat file configuration manager
+- Add and configure OLE DB configuration manager
+- Add a Data flow task to package
+- Add and configure flat file source
+- Add and configure lookup transformation
+- Add and configure OLE DB destination
+- Test SSIS package

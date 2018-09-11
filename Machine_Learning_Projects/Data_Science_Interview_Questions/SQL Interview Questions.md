@@ -94,7 +94,13 @@ on A.colA = B.colA
 
 ### 17. Advantages and diadvantages of self join? 
 
-### 18. What is the difference between union and union all?
+### 18. What is the difference between JOIN and UNION?
+SQL JOIN allows us to “lookup” records on other table based on the given conditions between two tables. UNION operation allows us to add 2 similar data sets to create resulting data set that contains all the data from the source data sets. 
+
+- Union does not require any condition for joining
+
+
+### 19. What is the difference between union and union all?
 __UNION__ and __UNION ALL__ both combine two structurally similar data sets, but UNION operation returns only the unique records from the resulting data set whereas UNION ALL will return all the rows, even if one or more rows are duplicated to each other. 
 
 ```
@@ -116,6 +122,52 @@ SELECT * FROM EMPLOYEE WHERE ID = 5
 |ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
 |----|------|--------|-----|-----|---|
 |5.0	|2.0	|2.0	|Anno	|80.0	|01-Feb-2012|
+
+### 20. What is the difference among UNION, MINUS and INTERSECT?
+___UNION__ combines the results from 2 tables and eliminates duplicate records from the result set.
+
+__MINUS__ operator when used between 2 tables, gives us all the rows from the first table except the rows which are present in the second table.
+
+__INTERSECT__ operator returns us only the matching or common rows between 2 result sets.
+
+To understand these operators, let’s see some examples. We will use two different queries to extract data from our emp table and then we will perform UNION, MINUS and INTERSECT operations on these two sets of data.
+
+UNION
+```
+SELECT * FROM EMPLOYEE WHERE ID = 5
+UNION 
+SELECT * FROM EMPLOYEE WHERE ID = 6
+```
+
+|ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
+|----|-------|-------|------|----|---|
+|5	|2	|2.0	|Anno	|80.0	|01-Feb-2012|
+|6	|2	|2.0	|Darl	|80.0	|11-Feb-2012|
+
+MINUS
+```
+SELECT * FROM EMPLOYEE
+MINUS
+SELECT * FROM EMPLOYEE WHERE ID > 2
+```
+
+|ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
+|1		|2	|Hash	|100.0	|01-Jan-2012|
+|2	|1	|2	|Robo	|100.0	|01-Jan-2012|
+
+INTERSECT
+```
+SELECT * FROM EMPLOYEE WHERE ID IN (2, 3, 5)
+INTERSECT
+SELECT * FROM EMPLOYEE WHERE ID IN (1, 2, 4, 5)
+```
+
+|ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
+|5	|2	|2	|Anno	|80.0	|01-Feb-2012|
+|2	|1	|2	|Robo	|100.0	|01-Jan-2012|
+
+
+
 
 
 ### 18. What is a primary key?

@@ -152,6 +152,7 @@ SELECT * FROM EMPLOYEE WHERE ID > 2
 ```
 
 |ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
+|---|-------|--------|------|----|---|
 |1		|2	|Hash	|100.0	|01-Jan-2012|
 |2	|1	|2	|Robo	|100.0	|01-Jan-2012|
 
@@ -163,6 +164,7 @@ SELECT * FROM EMPLOYEE WHERE ID IN (1, 2, 4, 5)
 ```
 
 |ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
+|---|-------|--------|------|----|---|
 |5	|2	|2	|Anno	|80.0	|01-Feb-2012|
 |2	|1	|2	|Robo	|100.0	|01-Jan-2012|
 

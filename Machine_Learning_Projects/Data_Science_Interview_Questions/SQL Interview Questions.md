@@ -60,8 +60,8 @@ __Order by__ clause is used to sort the final output result data set. It always 
 ### 9. what is the difference between having and where clause? 
 __WHERE__ and __HAVING__ both filters out records based on one or more conditions. The difference are:
 - WHERE clause can only be applied on a static non-aggregated column whereas HAVING on aggregated columns
-- Having clause always comes after where clause
-- Where clause can be used on select, insert and update statements but having is only used on select
+- HAVING clause always comes after WHERE clause
+- WHERE clause can be used on select, insert and update statements but having is only used on select
 - Aggregate functions cannot be used in the WHERE clause, unless it is in a sub query contained in a HAVING clause, whereas, aggregate functions can be used in Having clause
 
 __Note__: Having clause acts like where clause when there is no group by clause.
@@ -92,7 +92,30 @@ on A.colA = B.colA
 
 ### 16. What is a self join?
 
-### 17. Advantages and diadvantages of self join?
+### 17. Advantages and diadvantages of self join? 
+
+### 18. What is the difference between union and union all?
+__UNION__ and __UNION ALL__ both combine two structurally similar data sets, but UNION operation returns only the unique records from the resulting data set whereas UNION ALL will return all the rows, even if one or more rows are duplicated to each other. 
+
+```
+SELECT * FROM EMPLOYEE WHERE ID = 5
+UNION ALL
+SELECT * FROM EMPLOYEE WHERE ID = 5
+``` 
+|ID	|MGR_ID	| DEPT_ID |	NAME |	SAL	|DOJ|
+|---|-------|---------|-------|-----|---|
+|5.0 |	2.0	|2.0	|Anno|	80.0	|01-Feb-2012|
+|5.0	|2.0	|2.0	|Anno	|80.0	|01-Feb-2012|
+
+```
+SELECT * FROM EMPLOYEE WHERE ID = 5
+UNION 
+SELECT * FROM EMPLOYEE WHERE ID = 5
+```
+
+|ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
+|----|------|--------|-----|-----|---|
+|5.0	|2.0	|2.0	|Anno	|80.0	|01-Feb-2012|
 
 
 ### 18. What is a primary key?

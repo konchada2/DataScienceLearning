@@ -58,6 +58,13 @@ __Note__: To find the unique records in atable we can use group by instead of di
 __Order by__ clause is used to sort the final output result data set. It always comes at the end of slect statement. We can use column alias and column numbers in order by clause. When we are dealing with multiple columns we can sort both of them in ascending and descending order.   
 
 ### 9. what is the difference between having and where clause? 
+__WHERE__ and __HAVING__ both filters out records based on one or more conditions. The difference are:
+- WHERE clause can only be applied on a static non-aggregated column whereas HAVING on aggregated columns
+- Having clause always comes after where clause
+- Where clause can be used on select, insert and update statements but having is only used on select
+- Aggregate functions cannot be used in the WHERE clause, unless it is in a sub query contained in a HAVING clause, whereas, aggregate functions can be used in Having clause
+
+__Note__: Having clause acts like where clause when there is no group by clause.
 
 ### 10. Why do we use joins?
 We use joins to combine rows from two or more related tables and present as one output result.

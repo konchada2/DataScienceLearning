@@ -57,6 +57,10 @@ __Note__: To find the unique records in atable we can use group by instead of di
 ### 8. Explain order by clause ?
 __Order by__ clause is used to sort the final output result data set. It always comes at the end of slect statement. We can use column alias and column numbers in order by clause. When we are dealing with multiple columns we can sort both of them in ascending and descending order.   
 
+```
+select * from table_name ORDER BY col1 ASC, col2 DESC;
+```
+
 ### 9. what is the difference between having and where clause? 
 __WHERE__ and __HAVING__ both filters out records based on one or more conditions. The difference are:
 - WHERE clause can only be applied on a static non-aggregated column whereas HAVING on aggregated columns
@@ -296,6 +300,12 @@ The usual way to do it in SQL is to use CASE statement or DECODE statement.
 Insert into <schema>.<tablename> ([ColA], [ColB])
 Values ('A', 'B') 
 ```
+Insert data from another table
+```
+INSERT INTO tablename( column 1, column2,... )
+SELECT column1, column2,...
+FROM another_tablename;
+```
 - Update 
 ``` 
 Update <schema>.<tablename> 
@@ -307,7 +317,26 @@ Where <condition>
 Delete from <schema>.<tablename> 
 Where <condition> 
 ```
-
+- Merge
+MERGE is used to combine the data of multiple tables. It combines the INSERT and UPDATE elements. It is defined in the SQL:2003 standard.
+```
+MERGE INTO table1 USING table2 
+ON ( condition ) 
+WHEN MATCHED THEN UPDATE SET 
+column1 = value1, column2 = value2,...
+WHEN NOT MATCHED THEN INSERT 
+( column1, column2,... ) 
+VALUES( value1, value2,... );
+```
+```
+MERGE INTO dept_dw tgt USING dept src 
+on( src.deptno = tgt.deptno )
+WHEN MATCHED THEN UPDATE SET
+tgt.dname = src.dname, tgt.loc = trc.loc
+WHEN NOT MATCHED THEN INSERT 
+( deptno, dname, loc) VALUES 
+( src.deptno, src.dname, src.loc);
+```
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ## Indexing
@@ -346,6 +375,64 @@ To execute a Stored procedure simply select the name of the SP and click on run 
 ### 2. Where is a stored procedure located
 
 ### 3. What is a function?
+
+In SQL Server there are 3 types of Functions (or UDFs):
+
+- __Scalar function__: Returns a single value of any datatype except text, ntext, image, cursor & timestamp.
+- __Table Valued function__: Returns a table i.e. a record-set. The function body contains just a single TSQL statement.
+- __Multi-statement Table Valued function__: Also returns a table (record-set) but can contain multiple TSQL statements or scripts and is defined in BEGIN END block.
+
+### 4. What are single row functions?
+These functions work on single rows only and return one result per row. 
+
+- Manipulate data items
+- Accept arguments and return one value
+- Act on each row returned
+- Return one result per row
+- May modify the data type
+- Can be nested
+
+There are different type of single row functions:
+
+__Character functions__: which accepts character input and returns both character and number values.
+- LOWER
+- UPPER
+- INITCAP
+- CONCAT
+- SUBSTR
+- LENGTH
+- LPAD 
+- RPAD
+- TRIM
+- REPLACE
+
+__Number functions__: accepts numeric input and return numeric values.
+- ROUND
+- TRUNC
+- MOD : Returns remainder of division ``` Select MOD(5,2) From emp; ```
+- CEIL: Returns the largest integer value that is greater than or equal to a number ```SELECT CEIL( 23.2 ) FROM dual; ``` (24)
+- 
+
+__Date functions__: Date functions accepts date type and return date values except MONTHS_BETWEEN.
+- MONTHS_BETWEEN
+- ADD_MONTHS
+- NEXT_DAY
+- LAST_DAY
+- ROUND
+- TRUNC
+
+__conversion functions__: conversion functions are used to convert from one data type to another data type.
+- TO_CHAR
+- TO_NUM
+- TO_DATE
+
+__General functions__:
+- NVL: will convert the NULL value to the required value. ```SELECT sal + NVL( comm, 0 ) FROM emp; ```
+- NVL2
+- NULLIF
+- COALSECE
+- DECODE
+- CASE
 
 ### 4. What is the difference between a function and stored procedure?
 

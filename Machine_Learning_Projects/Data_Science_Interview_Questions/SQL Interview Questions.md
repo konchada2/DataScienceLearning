@@ -398,7 +398,7 @@ __Character functions__: which accepts character input and returns both characte
 - LOWER
 - UPPER
 - INITCAP
-- CONCAT
+- CONCAT: Concatenates two character literals
 - SUBSTR
 - LENGTH
 - LPAD 
@@ -407,11 +407,21 @@ __Character functions__: which accepts character input and returns both characte
 - REPLACE
 
 __Number functions__: accepts numeric input and return numeric values.
-- ROUND
+- ROUND(m,n): Rounds value to specified decimal ```SELECT ROUND(123.9994, 3), ROUND(123.9995, 3);``` (123.9990, 124.0000)
+  ROUND always returns a value. If length is negative and larger than the number of digits before the decimal point, ROUND returns 0.
+  
+  |Examples	|Result|
+  |---------|-------|
+|ROUND(748.58, -1)|	750.00|
+|ROUND(748.58, -2)|	700.00|
+|ROUND(748.58, -4)| 0|
+
+### Using ROUND to truncate__: ```SELECT ROUND(150.75, 0, 1);``` (150)
+
 - TRUNC
 - MOD : Returns remainder of division ``` Select MOD(5,2) From emp; ```
 - CEIL: Returns the largest integer value that is greater than or equal to a number ```SELECT CEIL( 23.2 ) FROM dual; ``` (24)
-- 
+- FLOOR: Returns the smallest integer value that is greater than or equal to a number ```SELECT FLOOR( 56.99 ) FROM dual; ``` (56)
 
 __Date functions__: Date functions accepts date type and return date values except MONTHS_BETWEEN.
 - MONTHS_BETWEEN

@@ -78,7 +78,10 @@ We use joins to combine rows from two or more related tables and present as one 
 - Cross join
 
 ### 12. How does inner join work?
-It is used to select rows where participating tables have identical columns.
+It is used to select rows where participating tables have identical columns.It combines the rows from two tables and create a result set containing only such records that are present in both the tables based on the joining condition (predicate).
+
+Inner join returns rows when there is at least one match in both tables If none of the record matches between two tables, then INNER JOIN will return a NULL set.
+
 ```
 select A.colA, B.colA
 FROM Table A 
@@ -89,6 +92,14 @@ on A.colA = B.colA
 ### 13. Difference between inner and left join?
 
 ### 14. How does outer join work?
+Outer join will return matching rows from both tables as well as any unmatched rows from one or both the tables.
+
+```
+select A.colA, B.colA
+FROM Table A 
+outer join Table B
+on A.colA = B.colA
+```
 
 ### 15. Give a scenario where inner join works the same as outer join?
 
@@ -115,6 +126,8 @@ WHERE e.mgr_id = m.id (+)
 |Meme	|Pete|
 |Bhuti|Tomiti|
 |Hash	|      |
+
+The (+) sign on the m id side of the predicate indicates that m.id is the outer table here.
 
 ### 17. Advantages and diadvantages of self join? 
 
@@ -148,7 +161,7 @@ SELECT * FROM EMPLOYEE WHERE ID = 5
 |5.0	|2.0	|2.0	|Anno	|80.0	|01-Feb-2012|
 
 ### 20. What is the difference among UNION, MINUS and INTERSECT?
-___UNION__ combines the results from 2 tables and eliminates duplicate records from the result set.
+__UNION__ combines the results from 2 tables and eliminates duplicate records from the result set.
 
 __MINUS__ operator when used between 2 tables, gives us all the rows from the first table except the rows which are present in the second table.
 
@@ -202,6 +215,7 @@ FROM EMPLOYEE o
 ```
 
 |name	|Sal	|ROWNUM_BY_SAL|
+|-----|----|-------------|
 |Hash	|100	|1|
 |Robo	|100	|2|
 |Anno	|80	|3|
@@ -234,6 +248,7 @@ FROM EMPLOYEE o
 ```
 
 |name	|Sal	|DENSE_RANK_BY_SAL|
+|-----|----|-----------------|
 |Hash	|100	|1|
 |Robo	|100	|1|
 |Anno	|80	|2|

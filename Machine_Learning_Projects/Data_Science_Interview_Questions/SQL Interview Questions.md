@@ -74,6 +74,8 @@ We use joins to combine rows from two or more related tables and present as one 
 - Left Join
 - Right Join
 - Outer Join
+- Self Join
+- Cross join
 
 ### 12. How does inner join work?
 It is used to select rows where participating tables have identical columns.
@@ -91,6 +93,28 @@ on A.colA = B.colA
 ### 15. Give a scenario where inner join works the same as outer join?
 
 ### 16. What is a self join?
+__Self Join__ is the act of joining one table with itself. It is often very useful to convert a hierarchical structure into a flat structure.
+
+Say for example we have employee table keeping the manager ID of each employee in the same row as that of the employee. This is an example of how a hierarchy (in this case employee-manager hierarchy) is stored in the RDBMS table. Now, suppose if we need to print out the names of the manager of each employee right beside the employee, we can use self join. See the example below:
+
+```
+SELECT e.name EMPLOYEE, m.name MANAGER
+FROM EMPLOYEE e, EMPLOYEE m
+WHERE e.mgr_id = m.id (+)
+```
+
+|EMPLOYEE	|MANAGER|
+|---------|-------|
+|Pete	|Hash|
+|Darl	|Hash|
+|Inno	|Hash|
+|Robo	|Hash|
+|Tomiti	|Robo|
+|Anno	|Robo|
+|Privy	|Robo|
+|Meme	|Pete|
+|Bhuti|Tomiti|
+|Hash	|      |
 
 ### 17. Advantages and diadvantages of self join? 
 
@@ -168,7 +192,56 @@ SELECT * FROM EMPLOYEE WHERE ID IN (1, 2, 4, 5)
 |5	|2	|2	|Anno	|80.0	|01-Feb-2012|
 |2	|1	|2	|Robo	|100.0	|01-Jan-2012|
 
+### 21. What are the differences among ROWNUM, RANK and DENSE_RANK?
+__ROW_NUMBER()__ is an analytical function which is used in conjunction to OVER() clause wherein we can specify ORDER BY and also PARTITION BY columns. It assigns contiguous, unique numbers from 1-N to a result set.
 
+Suppose if you want to generate the row numbers in the order of ascending employee salaries for example:
+```
+SELECT name, sal, row_number() over(order by sal desc) rownum_by_sal
+FROM EMPLOYEE o
+```
+
+|name	|Sal	|ROWNUM_BY_SAL|
+|Hash	|100	|1|
+|Robo	|100	|2|
+|Anno	|80	|3|
+|Darl	|80	|4|
+|Tomiti	|70	|5|
+|Pete	|70	|6|
+
+__RANK__ does not assign unique numbers—nor does it assign contiguous numbers. If two records tie for second place, no record will be assigned the 3rd rank as no one came in third, according to RANK. See below:
+
+```
+SELECT name, sal, rank() over(order by sal desc) rank_by_sal
+FROM EMPLOYEE o
+```
+|name	|Sal	|RANK_BY_SAL|
+|----|---|-------|
+|Hash	|100	|1|
+|Robo	|100	|1|
+|Anno	|80	|3|
+|Darl	|80	|3|
+|Tomiti|70|5|
+|Pete	|70	|5|
+|Bhuti	|60	|7|
+|Meme	|60	|7|
+
+__DENSE_RANK__, like RANK, does not assign unique numbers, but it does assign contiguous numbers. Even though two records tied for second place, there is a third-place record. See below:
+
+```
+SELECT name, sal, dense_rank() over(order by sal desc) dense_rank_by_sal
+FROM EMPLOYEE o
+```
+
+|name	|Sal	|DENSE_RANK_BY_SAL|
+|Hash	|100	|1|
+|Robo	|100	|1|
+|Anno	|80	|2|
+|Darl	|80	|2|
+|Tomiti	|70	|3|
+|Pete	|70	|3|
+|Bhuti	|60	|4|
+|Meme	|60	|4|
 
 
 
@@ -199,6 +272,9 @@ FROM Table;
 ### 22. What is GO command?
 __Go__ command is recognised by SSMS and is not a T-SQL Statement. It is used as signal to perform a task. It can not occupy the same line as a T-SQL statement. 
 
+### 23. How can we transpose a table using SQL (changing rows to column or vice-versa) ?
+The usual way to do it in SQL is to use CASE statement or DECODE statement.
+
 ### 23. What are the commands to modify data?
 - Insert 
 ``` 
@@ -216,9 +292,6 @@ Where <condition>
 Delete from <schema>.<tablename> 
 Where <condition> 
 ```
-
-
-
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -296,6 +369,41 @@ from table A
 group by Col_A
 having count_of_values > 1
 ```
+
+### 3. How to generate row number in SQL Without ROWNUM?
+
+```
+SELECT name, sal, (SELECT COUNT(*)  FROM EMPLOYEE i WHERE o.name >= i.name) as row_num
+FROM EMPLOYEE o
+order by row_num
+```
+|NAME	|SAL	|ROW_NUM|
+|-----|----|-------|
+|Anno	|80	|1|
+|Bhuti|60 |2|
+|Darl	|80	|3|
+|Hash	|100|4|
+
+column or the combination of columns should be unique. The column that is used in the row number generation logic is called “sort key”. Here sort key is “name” column. For this technique to work, the sort key needs to be unique. We have chosen the column “name” because this column happened to be unique in our Employee table. If it was not unique but some other collection of columns was, then we could have used those columns as our sort key (by concatenating those columns to form a single sort key).
+
+Also notice how the rows are sorted in the result set. We have done an explicit sorting on the row_num column, which gives us all the row numbers in the sorted order. But notice that name column is also sorted (which is probably the reason why this column is referred as sort-key). If you want to change the order of the sorting from ascending to descending, you will need to change “>=” sign to “<=” in the query.
+
+### 4. How to select first 5 records from a table?
+
+SQL Server
+```
+SELECT TOP 5 * FROM EMP;
+```
+
+Generic solution
+```
+SELECT  name 
+FROM EMPLOYEE o
+WHERE (SELECT count(*) FROM EMPLOYEE i WHERE i.name < o.name) < 5
+```
+
+Column should be distinct for the above query to work. 
+
 ----------------------------------------------------------------------------------------------------------------------------------------
 ## SQL Server Integration Sevices (SSIS)
 

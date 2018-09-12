@@ -1,6 +1,7 @@
 # SQL Interview Questions
 
 ## T-SQL 
+***
 
 ### 1. What are the common commands in SQL?
 - Select
@@ -340,6 +341,7 @@ WHEN NOT MATCHED THEN INSERT
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ## Indexing
+***
 
 ### 1. What is an index? What are the types of index and why do we use indexes?
 
@@ -355,6 +357,7 @@ WHEN NOT MATCHED THEN INSERT
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ## Stored Procedure, Functions and Triggers
+***
 
 ### 1. What is a stored procedure and when do we use? What is the usage in run time?
 __Stored procedure__ consists of 1 or more T-SQL queries which are stored for future re-usage. 
@@ -410,13 +413,13 @@ __Number functions__: accepts numeric input and return numeric values.
 - ROUND(m,n): Rounds value to specified decimal ```SELECT ROUND(123.9994, 3), ROUND(123.9995, 3);``` (123.9990, 124.0000)
   ROUND always returns a value. If length is negative and larger than the number of digits before the decimal point, ROUND returns 0.
   
-  |Examples	|Result|
-  |---------|-------|
+|    Examples	    |Result |
+|-----------------|-------|
 |ROUND(748.58, -1)|	750.00|
 |ROUND(748.58, -2)|	700.00|
-|ROUND(748.58, -4)| 0|
+|ROUND(748.58, -4)| 0     |
 
-### Using ROUND to truncate__: ```SELECT ROUND(150.75, 0, 1);``` (150)
+__Using ROUND to truncate__: ```SELECT ROUND(150.75, 0, 1);``` (150)
 
 - TRUNC
 - MOD : Returns remainder of division ``` Select MOD(5,2) From emp; ```
@@ -462,6 +465,7 @@ as
 
 ----------------------------------------------------------------------------------------------------------------------------
 ## SQL Problems
+***
 
 ### 1. Explain the output of the following query:
 ```

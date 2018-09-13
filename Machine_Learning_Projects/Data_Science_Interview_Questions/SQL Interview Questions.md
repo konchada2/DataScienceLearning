@@ -520,6 +520,28 @@ WHERE (SELECT count(*) FROM EMPLOYEE i WHERE i.name < o.name) < 5
 
 Column should be distinct for the above query to work. 
 
+### 5. How many minutes worth of video does an average publisher have?
+
+__Table Schema__
+
+|__Publisher_Info__|                           |__Consumption_Info__|                           
+|------------------|                           |------------------|
+| Publisher_id  |                              |  Video_id        |
+| Video_id  |                                  |  User_id         |
+| video_duration(in minutes)|                  |  User_timespent  |
+
+```
+select sum(video_duration)/count(distinct Publisher_id) as Min_Avg_Publisher
+from Publisher_info;
+```
+### 6. How many publishers have atleast one user who watched their videos?
+
+```
+select count(Distinct Publisher_id)
+From Publisher_info P
+Inner JOIN Consumption info C
+Where P.Video_id = C.Video_id
+```
 ----------------------------------------------------------------------------------------------------------------------------------------
 ## SQL Server Integration Sevices (SSIS)
 

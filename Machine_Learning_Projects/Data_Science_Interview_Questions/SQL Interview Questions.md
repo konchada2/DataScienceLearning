@@ -524,11 +524,17 @@ Column should be distinct for the above query to work.
 
 __Table Schema__
 
-|__Publisher_Info__|                           |__Consumption_Info__|                           
-|------------------|                           |------------------|
-| Publisher_id  |                              |  Video_id        |
-| Video_id  |                                  |  User_id         |
-| video_duration(in minutes)|                  |  User_timespent  |
+|__Publisher_Info__|                                                      
+|------------------|                           
+| Publisher_id  |                              
+| Video_id  |                                  
+| video_duration(in minutes)|         
+
+|__Consumption_Info__|
+|------------------|
+|  Video_id        |
+|  User_id         |
+|  User_timespent  |
 
 ```
 select sum(video_duration)/count(distinct Publisher_id) as Min_Avg_Publisher

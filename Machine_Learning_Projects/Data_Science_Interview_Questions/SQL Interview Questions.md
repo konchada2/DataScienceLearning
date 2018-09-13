@@ -526,15 +526,15 @@ __Table Schema__
 
 |__Publisher_Info__|                                                      
 |------------------|                           
-| Publisher_id  |                              
-| Video_id  |                                  
+| Publisher_id     |                              
+| Video_id         |                                  
 | video_duration(in minutes)|         
 
 |__Consumption_Info__|
-|------------------|
-|  Video_id        |
-|  User_id         |
-|  User_timespent  |
+|--------------------|
+|  Video_id          |
+|  User_id           |
+|  User_timespent    |
 
 ```
 select sum(video_duration)/count(distinct Publisher_id) as Min_Avg_Publisher

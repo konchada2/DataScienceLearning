@@ -312,6 +312,10 @@ FROM EMPLOYEE o
 ### 24. What is a foreign key?
  A __foreign key__ is a primary key from one table that shows up as column/field in another table where there is a relation between the tables. There can be several foreign keys.
  
+ ![Pk_fk](https://github.com/konchada2/DataScienceLearning/blob/master/Machine_Learning_Projects/Data_Science_Interview_Questions/Posts/DAND_PK_FK_Example.png)
+ 
+ 
+ 
 ### 25. What is normalization?
 It is the process of organizing the columns using attributes(Foreign or primary key) and tables using their relationships to minimize data redundancy. Normalization is used to break the tables into smaller tables to avoid redundancy without losing information. It is used to improve the performance and bring the database to consistent state. There are 3 main normals forms:
 

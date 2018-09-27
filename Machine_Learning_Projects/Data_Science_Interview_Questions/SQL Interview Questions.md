@@ -368,14 +368,18 @@ FROM EMPLOYEE o
  
  ![Pk_fk](https://github.com/konchada2/DataScienceLearning/blob/master/Machine_Learning_Projects/Data_Science_Interview_Questions/Posts/DAND_PK_FK_Example.png)
  
- 
- 
 ### 25. What is normalization?
 It is the process of organizing the columns using attributes(Foreign or primary key) and tables using their relationships to minimize data redundancy. Normalization is used to break the tables into smaller tables to avoid redundancy without losing information. It is used to improve the performance and bring the database to consistent state. There are 3 main normals forms:
 
 - __1NF__ : Eliminates repeating groups of entities into individual tables. An entity referes to a person or place or a thing. (Remove duplicates)
 - __2NF__: Create seperate tables for set of values that apply to mutiple records.
 - __3NF__: Eliminate fields that does not depend on the primary key.
+
+__Database Normalisation__: This concept is about how data will be stored and organised. There are essentially three aspects to it:
+
+- Are the tables storing logical groupings of data?
+- Can I make changes in a single location, rather than in many tables for the same information?
+- Can I access and manipulate data quickly and efficiently?
 
 ### 26. What is the use of case expressions?
 To substitute stored database values with our own values in the output results. 

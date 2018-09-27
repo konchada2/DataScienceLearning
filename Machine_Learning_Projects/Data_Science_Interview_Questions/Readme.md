@@ -8,3 +8,5 @@ Below are some of the important topics in order to be successful in a data scien
 - [Machine Learning](#Machine-Learning-Interview-Questions)
 - [Software Engineering](#Software-Engineering-Questions)
 - [Tableau](#Tableau-Interview-Questions)
+
+![SQL](https://github.com/konchada2/DataScienceLearning/blob/master/Machine_Learning_Projects/Data_Science_Interview_Questions/SQL%20Quick%20Reference%20Guide.png)

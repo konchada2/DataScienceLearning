@@ -161,11 +161,25 @@ SELECT * FROM Shapes CROSS JOIN Colors
 |Circle|Blue|
 |Square|Blue|
 
+we can also use an inner join in SQL to mimic a cross join by doing something like this: 
+```
+SELECT * FROM Table_A INNER JOIN Table_B ON 1 = 1
+or
+SELECT * FROM Table_A INNER JOIN Table_B ON 'Common_field' = 'Common_field'
+```
 ### 19. What is the difference between JOIN and UNION?
+While joins allow us to combine data in a horizontal fashion, unions allow us to combine data in a vertical fashion.
 SQL JOIN allows us to “lookup” records on other table based on the given conditions between two tables. UNION operation allows us to add 2 similar data sets to create resulting data set that contains all the data from the source data sets. 
 
 - Union does not require any condition for joining
+- For union operation to work we need to have the same number of columns, same column names, same column data types, etc
 
+If column names are different in one table then we can use alias to perform union operation(Values and data types should be the same)
+```
+SELECT Order ID, Order Date, Product ID, Sales FROM Orders_West
+UNION
+SELECT ID AS Order ID, Date AS Order Date, Product AS Product ID, Amount AS Sales FROM Orders_South
+```
 
 ### 20. What is the difference between union and union all?
 __UNION__ and __UNION ALL__ both combine two structurally similar data sets, but UNION operation returns only the unique records from the resulting data set whereas UNION ALL will return all the rows, even if one or more rows are duplicated to each other. 
@@ -189,6 +203,8 @@ SELECT * FROM EMPLOYEE WHERE ID = 5
 |ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
 |----|------|--------|-----|-----|---|
 |5.0	|2.0	|2.0	|Anno	|80.0	|01-Feb-2012|
+
+Because __UNION ALL__ does not attempt to eliminate duplicates, the database has much less work to do to retrieve your result set. Thus, UNION ALL queries are significantly more performant than regular unions.
 
 ### 21. What is the difference among UNION, MINUS and INTERSECT?
 __UNION__ combines the results from 2 tables and eliminates duplicate records from the result set.

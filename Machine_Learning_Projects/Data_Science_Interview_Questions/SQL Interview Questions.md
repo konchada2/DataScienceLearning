@@ -136,13 +136,38 @@ The (+) sign on the m id side of the predicate indicates that m.id is the outer 
 
 ### 17. Advantages and diadvantages of self join? 
 
-### 18. What is the difference between JOIN and UNION?
+
+
+### 18. What is cross join? 
+Say we have two tables shapes and colors.
+|__Shapes__|
+|----------|
+|Circle|
+|Square|
+
+|__Colors__|
+|----------|
+|Red|
+|Blue|
+
+What if we wanted to determine all the possible combinations of shapes and colors? We can accomplish this using a cross join as follows:
+```
+SELECT * FROM Shapes CROSS JOIN Colors
+```
+|__Shapes__|__Colors__|
+|----------|----------|
+|Circle|Red|
+|Square|Red|
+|Circle|Blue|
+|Square|Blue|
+
+### 19. What is the difference between JOIN and UNION?
 SQL JOIN allows us to “lookup” records on other table based on the given conditions between two tables. UNION operation allows us to add 2 similar data sets to create resulting data set that contains all the data from the source data sets. 
 
 - Union does not require any condition for joining
 
 
-### 19. What is the difference between union and union all?
+### 20. What is the difference between union and union all?
 __UNION__ and __UNION ALL__ both combine two structurally similar data sets, but UNION operation returns only the unique records from the resulting data set whereas UNION ALL will return all the rows, even if one or more rows are duplicated to each other. 
 
 ```
@@ -165,7 +190,7 @@ SELECT * FROM EMPLOYEE WHERE ID = 5
 |----|------|--------|-----|-----|---|
 |5.0	|2.0	|2.0	|Anno	|80.0	|01-Feb-2012|
 
-### 20. What is the difference among UNION, MINUS and INTERSECT?
+### 21. What is the difference among UNION, MINUS and INTERSECT?
 __UNION__ combines the results from 2 tables and eliminates duplicate records from the result set.
 
 __MINUS__ operator when used between 2 tables, gives us all the rows from the first table except the rows which are present in the second table.
@@ -210,7 +235,7 @@ SELECT * FROM EMPLOYEE WHERE ID IN (1, 2, 4, 5)
 |5	|2	|2	|Anno	|80.0	|01-Feb-2012|
 |2	|1	|2	|Robo	|100.0	|01-Jan-2012|
 
-### 21. What are the differences among ROWNUM, RANK and DENSE_RANK?
+### 22. What are the differences among ROWNUM, RANK and DENSE_RANK?
 __ROW_NUMBER()__ is an analytical function which is used in conjunction to OVER() clause wherein we can specify ORDER BY and also PARTITION BY columns. It assigns contiguous, unique numbers from 1-N to a result set.
 
 Suppose if you want to generate the row numbers in the order of ascending employee salaries for example:
@@ -265,20 +290,20 @@ FROM EMPLOYEE o
 
 
 
-### 18. What is a primary key?
+### 23. What is a primary key?
  A __primary key__ is a field in a database table that is used to uniquely identify records. It is a must in a table.
  
-### 19. What is a foreign key?
+### 24. What is a foreign key?
  A __foreign key__ is a primary key from one table that shows up as column/field in another table where there is a relation between the tables. There can be several foreign keys.
  
-### 20. What is normalization?
+### 25. What is normalization?
 It is the process of organizing the columns using attributes(Foreign or primary key) and tables using their relationships to minimize data redundancy. Normalization is used to break the tables into smaller tables to avoid redundancy without losing information. It is used to improve the performance and bring the database to consistent state. There are 3 main normals forms:
 
 - __1NF__ : Eliminates repeating groups of entities into individual tables. An entity referes to a person or place or a thing. (Remove duplicates)
 - __2NF__: Create seperate tables for set of values that apply to mutiple records.
 - __3NF__: Eliminate fields that does not depend on the primary key.
 
-### 21. What is the use of case expressions?
+### 26. What is the use of case expressions?
 To substitute stored database values with our own values in the output results. 
 ```
 select 
@@ -289,13 +314,13 @@ CASE columnname
 END AS New_columnname
 FROM Table;     
 ```
-### 22. What is GO command?
+### 27. What is GO command?
 __Go__ command is recognised by SSMS and is not a T-SQL Statement. It is used as signal to perform a task. It can not occupy the same line as a T-SQL statement. 
 
-### 23. How can we transpose a table using SQL (changing rows to column or vice-versa) ?
+### 28. How can we transpose a table using SQL (changing rows to column or vice-versa) ?
 The usual way to do it in SQL is to use CASE statement or DECODE statement.
 
-### 23. What are the commands to modify data?
+### 29. What are the commands to modify data?
 - Insert 
 ``` 
 Insert into <schema>.<tablename> ([ColA], [ColB])

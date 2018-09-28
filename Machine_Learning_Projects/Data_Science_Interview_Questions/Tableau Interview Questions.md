@@ -11,3 +11,8 @@
 ### 5. Say we have an extract for a billion records. How would you optimize to bring the extract time down?
 
 ### 6. How do you automate a report/dashboard in Tableau?
+
+### 7. What actions can be performed in the Tableau Metadata are?
+- Hide Columns
+- Rename Columns
+- Change the data type of a column

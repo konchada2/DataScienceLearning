@@ -226,6 +226,7 @@ The (+) sign on the m id side of the predicate indicates that m.id is the outer 
 
 ### 18. What is cross join? 
 Say we have two tables shapes and colors.
+
 |__Shapes__|
 |----------|
 |Circle|
@@ -389,8 +390,64 @@ FROM EMPLOYEE o
 |Pete	|70	|3|
 |Bhuti	|60	|4|
 |Meme	|60	|4|
+### 24. What is a window function?
+They allow a calculation across a set of table rows that are somehow related to the current row.
+- We cannot use window functions and standard aggregations in the same query.
+- We can't include window functions in a GROUP BY clause. 
 
+```
+SELECT standard_amt_usd,
+       DATE_TRUNC('year', occurred_at) as year,
+       SUM(standard_amt_usd) OVER (PARTITION BY DATE_TRUNC('year', occurred_at) ORDER BY occurred_at) AS running_total
+FROM orders
+```
+The __ORDER__ and __PARTITION__ define what is referred to as the “window”—the ordered subset of data over which calculations are made. Removing ORDER BY just leaves an unordered partition; in our query's case, each column's value is simply an aggregation (e.g. sum, count, average, minimum, or maximum) of all the standard_qty values in its respective account_id.
 
+__Using Alias Function__
+
+This is made up of two parts: the Alias (uses WINDOW <name> AS expression) between the WHERE clause and the GROUP BY clause; and the Windows function part (normally with PARTITION statement). Here's an example:
+```
+SELECT id,
+       account_id,
+       DATE_TRUNC('year',occurred_at) AS year,
+       DENSE_RANK() OVER account_year_window AS dense_rank,
+       total_amt_usd,
+       SUM(total_amt_usd) OVER account_year_window AS sum_total_amt_usd,
+       COUNT(total_amt_usd) OVER account_year_window AS count_total_amt_usd,
+       AVG(total_amt_usd) OVER account_year_window AS avg_total_amt_usd,
+       MIN(total_amt_usd) OVER account_year_window AS min_total_amt_usd,
+FROM orders 
+WINDOW account_year_window AS (PARTITION BY account_id ORDER BY DATE_TRUNC('year',occurred_at))
+```
+ 
+__LAG__
+Used to compare data in the preceding row. Use LAG(column_name)
+
+__LEAD__
+Used to compare data in the following row. Use LEAD(column_name).
+
+Example: You want to determine how the current order's total revenue (i.e. from sales of all types of paper) revenue compares to the next order's total revenue.
+
+```
+SELECT occurred_at,
+       total_sales,
+       LEAD(total_sales) OVER (ORDER BY occurred_at) AS lead,
+       LEAD(total_sales) OVER (ORDER BY occurred_at) - total_sales AS lead_difference
+FROM (
+SELECT occurred_at, SUM(total_amt_usd) AS total_sales
+  FROM orders 
+ GROUP BY 1
+ ) sub
+ ```
+__NTILE__
+
+This identifies what percentile (or quartile, or any other subdivision) a given row falls into. The syntax is NTILE(*# of budgets*). ORDER BY is often used to determine which column to use to determine the quartiles (or whatever number of tiles you specify). 
+```
+NTILE(4) OVER (ORDER BY standard_qty) AS quartile 
+or 
+NTILE(100) OVER (ORDER BY standard_qty) AS percentile
+```
+Note that this doesn't work as well for relatively few rows as there isn't enough data for a meaningful spread.
 
 ### 23. What is a primary key?
  A __primary key__ is a field in a database table that is used to uniquely identify records. It is a must in a table.
@@ -511,6 +568,92 @@ Tips to limit query run time:
 - Reduce table sizes first before joining them using pre-aggregations or other filters with WHERE.
 - You can use EXPLAIN at the start of your query to see which statements are executed first and how long they take. The modify the steps that are expensive. Then run EXPLAIN again to see if time has been reduced.
 - FULL JOIN and COUNT run pretty fast. COUNT(DISTINCT) is slow.
+----------------------------------------------------------------------------------------------------------------------------------------
+## Subqueries
+***
+
+__Example__
+
+If you wanted to find the average number of events for each day for each channel. The first table will provide us the number of events for each day and channel, and then we will need to average these values together using a second query.
+```
+SELECT channel, AVG(events) AS average_events
+FROM (SELECT DATE_TRUNC('day',occurred_at) AS day,
+             channel, COUNT(*) as events
+      FROM web_events 
+      GROUP BY 1,2) sub
+GROUP BY channel
+ORDER BY 2 DESC;
+```
+- You should not include an __alias when you write a subquery in a conditional statement__. This is because the subquery is treated as an individual value (or set of values in the IN) case rather than as a table.
+- If you return an entire column from your subquery, you need to use IN to perform a logical argument. If you returned an entire table, then you must use an ALIAS for the table, and perform additional logic on the entire table
+
+```
+SELECT AVG(standard_qty) mean_standard, AVG(gloss_qty) mean_gloss, AVG(poster_qty) mean_poster, SUM(total_amt_usd) sum_total_spent
+FROM orders
+WHERE DATE_TRUNC('month', occurred_at) =
+    (SELECT DATE_TRUNC('month', MIN(occurred_at)) AS     min_month
+    FROM orders)
+```
+__WITH__
+
+The WITH statement is often called a Common Table Expression or CTE. Though these expressions serve the exact same purpose as subqueries, they are more common in practice, as they tend to be cleaner for a future reader to follow the logic.
+
+These are effectively like writing functions in programming, and calling them when they need to be run. Instead of a function name, you just use an ALIAS name.
+
+Comparison of subquery vs WITH:
+
+Subquery:
+```
+SELECT channel, AVG(events) AS average_events
+FROM (SELECT DATE_TRUNC('day',occurred_at) AS day,
+             channel, COUNT(*) as events
+      FROM web_events 
+      GROUP BY 1,2) sub
+GROUP BY channel
+ORDER BY 2 DESC;
+```
+
+WITH:
+```
+WITH events AS (SELECT DATE_TRUNC('day',occurred_at) AS day, 
+                        channel, COUNT(*) as events
+          FROM web_events 
+          GROUP BY 1,2)
+
+SELECT channel, AVG(events) AS average_events
+FROM events
+GROUP BY channel
+ORDER BY 2 DESC;
+```
+Creating multiple WITH tables
+When having multiple WITH tables, you don't list WITH on each one. Only the first table.
+```
+WITH table1 AS (
+          SELECT *
+          FROM web_events),
+
+     table2 AS (
+          SELECT *
+          FROM accounts)
+
+
+SELECT *
+FROM table1
+JOIN table2
+ON table1.account_id = table2.id;
+```
+### 2. What is the lifetime average amount spent in terms of total_amt_usd for the top 10 total spending accounts?
+```
+WITH t1 AS (
+    SELECT a.name, SUM(o.total_amt_usd) total_spend
+    FROM accounts a
+    JOIN orders o
+    ON o.account_id = a.id
+    GROUP BY 1
+    ORDER BY 2 DESC
+    LIMIT 10 )
+SELECT AVG(total_spend) FROM t1
+```
 ----------------------------------------------------------------------------------------------------------------------------------------
 ## Indexing
 ***

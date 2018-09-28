@@ -98,6 +98,14 @@ __Aggregate functions__ are used to calculate values in a T-SQL query and return
 Select COUNT(DISTINCT JobTitle) as 'Num_JobTitles' 
 FROM Employee
 ```
+All the aggregate functions ignore null values and are operated column wise. 
+```
+SELECT DISTINCT column1, column2, column3
+FROM table1; 
+```
+__which would return the unique or DISTINCT or non-duplicate rows across all three columns__. 
+- __Distinct__ can slow the query
+
 ### 7. What is group by clause?
 __Group By__ clause is used in combination with aggregate function to group returned query output.
 ```
@@ -107,7 +115,13 @@ Group By City
 ```
 The query will return the count of each distinct city. 
 
-__Note__: To find the unique records in atable we can use group by instead of distinct. 
+- Group By are used to aggregate unique values which can be a single column or combination of multiple columns resulting in uniqueness
+- Any column in the SELECT statement that is not within an aggregator must be in the GROUP BY clause
+- The order of column names in GROUP BY clause doesn’t matter, the results will be the same regardless
+- As with ORDER BY, we can substitute numbers for column names in the GROUP BY clause
+
+
+__Note__: To find the unique records in a table we can use group by instead of distinct. 
 
 ### 8. Explain order by clause ?
 __Order by__ clause is used to sort the final output result data set. It always comes at the end of slect statement. We can use column alias and column numbers in order by clause. When we are dealing with multiple columns we can sort both of them in ascending and descending order.   
@@ -123,6 +137,16 @@ __WHERE__ and __HAVING__ both filters out records based on one or more condition
 - WHERE clause can be used on select, insert and update statements but having is only used on select
 - Aggregate functions cannot be used in the WHERE clause, unless it is in a sub query contained in a HAVING clause, whereas, aggregate functions can be used in Having clause
 
+How many accounts spent more than 30,000 usd total across all orders?
+```
+SELECT a.id, a.name, SUM(o.total_amt_usd) total_spent
+FROM accounts a
+JOIN orders o
+ON a.id = o.account_id
+GROUP BY a.id, a.name
+HAVING SUM(o.total_amt_usd) > 30000
+ORDER BY total_spent;
+```
 __Note__: Having clause acts like where clause when there is no group by clause.
 
 ### 10. Why do we use joins?
@@ -159,13 +183,21 @@ FROM Table A
 outer join Table B
 on A.colA = B.colA
 ```
+- Say for example we have a scenario where each account who has a sales rep and each sales rep that has an account (all of the columns in these returned rows will be full)
+- But also each account that does not have a sales rep and each sales rep that does not have an account (some of the columns in these returned rows will be empty)
 
+```
+SELECT *
+FROM accounts
+FULL JOIN sales_reps ON accounts.sales_rep_id = sales_reps.id
+WHERE accounts.sales_rep_id IS NULL OR sales_reps.id IS NULL
+```
 ### 15. Give a scenario where inner join works the same as outer join?
 
 ### 16. What is a self join?
 __Self Join__ is the act of joining one table with itself. It is often very useful to convert a hierarchical structure into a flat structure.
 
-Say for example we have employee table keeping the manager ID of each employee in the same row as that of the employee. This is an example of how a hierarchy (in this case employee-manager hierarchy) is stored in the RDBMS table. Now, suppose if we need to print out the names of the manager of each employee right beside the employee, we can use self join. See the example below:
+Say for example we have employee table keeping the manager ID of each employee in the same row as that of the employee. This is an example of how a hierarchy (in this employee-manager hierarchy) is stored in the RDBMS table. Now, suppose if we need to print out the names of the manager of each employee right beside the employee, we can use self join. See the example below:
 
 ```
 SELECT e.name EMPLOYEE, m.name MANAGER
@@ -392,6 +424,24 @@ CASE columnname
 END AS New_columnname
 FROM Table;     
 ```
+- The CASE statement always goes in the SELECT clause.
+- CASE must include the following components: WHEN, THEN, and END. ELSE is an optional component to catch cases that didn’t meet any of the other previous CASE conditions.
+- You can make any conditional statement using any conditional operator (like WHERE) between WHEN and THEN. This includes stringing together multiple conditional statements using AND and OR.
+- You can include multiple WHEN statements, as well as an ELSE statement again, to deal with any unaddressed conditions.
+- Using just a WHERE clause will produce the same results. However, this only works if there's one condition. If there are multiple, then use a CASE.
+__Example__
+```
+SELECT s.name, COUNT(*) num_ords,
+     CASE WHEN COUNT(*) > 200 THEN 'top'
+     ELSE 'not' END AS sales_rep_level
+FROM orders o
+JOIN accounts a
+ON o.account_id = a.id 
+JOIN sales_reps s
+ON s.id = a.sales_rep_id
+GROUP BY s.name
+ORDER BY 2 DESC;
+```
 ### 27. What is GO command?
 __Go__ command is recognised by SSMS and is not a T-SQL Statement. It is used as signal to perform a task. It can not occupy the same line as a T-SQL statement. 
 
@@ -441,7 +491,26 @@ WHEN NOT MATCHED THEN INSERT
 ( deptno, dname, loc) VALUES 
 ( src.deptno, src.dname, src.loc);
 ```
+### 30. How to do performance tuning in SQL?
+One way to make a query run faster is to reduce the number of calculations that need to be performed. Some of the high-level things that will affect the number of calculations a given query will make include:
 
+- Table size
+- Joins
+- Aggregations
+
+Query runtime is also dependent on some things that you can’t really control related to the database itself:
+
+- Other users running queries concurrently on the database
+- Database software and optimization (e.g. Postgres is optimized differently than Redshift)
+
+Tips to limit query run time:
+
+- Put the LIMIT statement in a sub-query to limit data as it is executed first. Not the outer query otherwise it will still just compute the full query and then LIMIT the results in the last step. This is redundant.
+- Limit your query to a small time window if you have time-series data.
+- Test your query on a subset of data first.
+- Reduce table sizes first before joining them using pre-aggregations or other filters with WHERE.
+- You can use EXPLAIN at the start of your query to see which statements are executed first and how long they take. The modify the steps that are expensive. Then run EXPLAIN again to see if time has been reduced.
+- FULL JOIN and COUNT run pretty fast. COUNT(DISTINCT) is slow.
 ----------------------------------------------------------------------------------------------------------------------------------------
 ## Indexing
 ***

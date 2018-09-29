@@ -572,9 +572,12 @@ Tips to limit query run time:
 ## Subqueries
 ***
 
+### 1. What is a subquery?
+A subquery is a query nested inside another query such as __SELECT, INSERT, UPDATE, or DELETE__ statement.
+
 __Example__
 
-If you wanted to find the average number of events for each day for each channel. The first table will provide us the number of events for each day and channel, and then we will need to average these values together using a second query.
+1. If you wanted to find the average number of events for each day for each channel. The first table will provide us the number of events for each day and channel, and then we will need to average these values together using a second query.
 ```
 SELECT channel, AVG(events) AS average_events
 FROM (SELECT DATE_TRUNC('day',occurred_at) AS day,
@@ -584,6 +587,106 @@ FROM (SELECT DATE_TRUNC('day',occurred_at) AS day,
 GROUP BY channel
 ORDER BY 2 DESC;
 ```
+2.  find all employees who locate in the location with the id 1700.
+```
+SELECT 
+    employee_id, first_name, last_name
+FROM
+    employees
+WHERE
+    department_id IN (SELECT 
+            department_id
+        FROM
+            departments
+        WHERE
+            location_id = 1700)
+ORDER BY first_name , last_name;
+```
+The query placed within the parentheses is called a subquery. It is also known as an inner query or inner select. The query that contains the subquery is called an outer query or an outer select.
+
+You can use a subquery in many places such as:
+
+- With the IN or NOT IN operator
+- With comparison operators
+- With the EXISTS or NOT EXISTS operator
+- With the ANY or ALL operator
+- In the __FROM__ clause
+- In the __SELECT__ clause
+- In the __Where__ clause
+
+__SQL subquery with the EXISTS or NOT EXISTS operator__
+The __EXISTS__ operator checks for the existence of rows returned from the subquery. It returns true if the subquery contains any rows. Otherwise, it returns false.
+
+The following example finds all departments which have at least one employee with the salary is greater than 10,000:
+```
+SELECT 
+    department_name
+FROM
+    departments d
+WHERE
+    EXISTS( SELECT 
+            1
+        FROM
+            employees e
+        WHERE
+            salary > 10000
+                AND e.department_id = d.department_id)
+ORDER BY department_name;
+```
+__SQL subquery with the ALL operator__
+
+The following condition evaluates to true if x is greater than every value returned by the subquery.
+```x > ALL (subquery)```
+
+The following example finds all employees whose salaries are greater than the lowest salary of every department:
+```
+SELECT 
+    employee_id, first_name, last_name, salary
+FROM
+    employees
+WHERE
+    salary >= ALL (SELECT 
+            MIN(salary)
+        FROM
+            employees
+        GROUP BY department_id)
+ORDER BY first_name , last_name;
+```
+__SQL subquery with the ANY operator__
+
+For example, the following condition evaluates to true if x is greater than any value returned by the subquery. So the condition x > SOME (1,2,3) evaluates to true if x is greater than 1.
+
+The following query finds all employees whose salaries are greater than or equal to the highest salary of every department.
+```
+SELECT 
+    employee_id, first_name, last_name, salary
+FROM
+    employees
+WHERE
+    salary >= SOME (SELECT 
+            MAX(salary)
+        FROM
+            employees
+        GROUP BY department_id);
+```
+Note that the __SOME__ operator is a synonym for the __ANY__ operator so you can use them interchangeably
+
+__SQL subquery in the FROM clause__
+
+You can use this query as a subquery in the FROM clause to calculate the average of average salary of departments as follows:
+```
+SELECT 
+    ROUND(AVG(average_salary), 0)
+FROM
+    (SELECT 
+        AVG(salary) average_salary
+    FROM
+        employees
+    GROUP BY department_id) department_salary;
+```
+
+In this syntax, the table alias is mandatory because all tables in the FROM clause must have a name.
+
 - You should not include an __alias when you write a subquery in a conditional statement__. This is because the subquery is treated as an individual value (or set of values in the IN) case rather than as a table.
 - If you return an entire column from your subquery, you need to use IN to perform a logical argument. If you returned an entire table, then you must use an ALIAS for the table, and perform additional logic on the entire table
 

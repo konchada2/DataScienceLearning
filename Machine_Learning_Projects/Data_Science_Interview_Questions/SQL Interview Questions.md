@@ -687,6 +687,56 @@ FROM
 
 In this syntax, the table alias is mandatory because all tables in the FROM clause must have a name.
 
+__SQL Subquery in the SELECT clause__
+
+The following example finds the salaries of all employees, their average salary, and the difference between the salary of each employee and the average salary.
+```
+SELECT 
+    employee_id,
+    first_name,
+    last_name,
+    salary,
+    (SELECT 
+            ROUND(AVG(salary), 0)
+        FROM
+            employees) average_salary,
+    salary - (SELECT 
+            ROUND(AVG(salary), 0)
+        FROM
+            employees) difference
+FROM
+    employees
+ORDER BY first_name , last_name;
+```
+
+__SQL Subquery in the Having clause__
+```
+SELECT   JobTitle,
+         AVG(VacationHours) AS AverageVacationHours
+FROM     HumanResources.Employee
+GROUP BY JobTitle
+HAVING   AVG(VacationHours) > (SELECT AVG(VacationHours)
+                               FROM   HumanResources.Employee)
+```
+This query is executed as:
+
+- Compute the remaining average vacation hours for all employees. (subquery)
+- Group records by JobTitle and computer the average vacation hours.
+- Only keep groups whose average vacation hours are greater than the overall average
+__Correlated Subqueries using having clause__
+```
+SELECT   JobTitle,
+         MaritalStatus,
+         AVG(VacationHours)
+FROM     HumanResources.Employee AS E
+GROUP BY JobTitle, MaritalStatus
+HAVING   AVG(VacationHours) > 
+            (SELECT AVG(VacationHours)
+             FROM   HumanResources.Employee
+             WHERE  HumanResources.Employee. MaritalStatus =
+                    E.MaritalStatus)
+```                    
+
 - You should not include an __alias when you write a subquery in a conditional statement__. This is because the subquery is treated as an individual value (or set of values in the IN) case rather than as a table.
 - If you return an entire column from your subquery, you need to use IN to perform a logical argument. If you returned an entire table, then you must use an ALIAS for the table, and perform additional logic on the entire table
 

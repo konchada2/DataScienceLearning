@@ -795,7 +795,11 @@ FROM table1
 JOIN table2
 ON table1.account_id = table2.id;
 ```
-### 2. What is the lifetime average amount spent in terms of total_amt_usd for the top 10 total spending accounts?
+
+### 2. What is correlated subquery?
+Correlated Subqueries are used to select data from a table referenced in the outer query. The subquery is known as a correlated because the subquery is related to the outer query. In this type of queries, a table alias (also called a correlation name) must be used to specify which table reference is to be used.
+
+### 3. What is the lifetime average amount spent in terms of total_amt_usd for the top 10 total spending accounts?
 ```
 WITH t1 AS (
     SELECT a.name, SUM(o.total_amt_usd) total_spend

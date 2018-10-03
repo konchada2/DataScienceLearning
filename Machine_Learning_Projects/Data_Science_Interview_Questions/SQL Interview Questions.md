@@ -117,6 +117,7 @@ The query will return the count of each distinct city.
 
 - Group By are used to aggregate unique values which can be a single column or combination of multiple columns resulting in uniqueness
 - Any column in the SELECT statement that is not within an aggregator must be in the GROUP BY clause
+- Group by shouldn't have aggregate function in its clause like ```group by id, sum(sales) ```, this is incorrect
 - The order of column names in GROUP BY clause doesn’t matter, the results will be the same regardless
 - As with ORDER BY, we can substitute numbers for column names in the GROUP BY clause
 
@@ -320,6 +321,8 @@ SELECT * FROM EMPLOYEE
 MINUS
 SELECT * FROM EMPLOYEE WHERE ID > 2
 ```
+- __Minus__ takes the result of two queries and return all rows from the first result that do not overlap with rows from the second result
+
 
 |ID	|MGR_ID	|DEPT_ID	|NAME	|SAL	|DOJ|
 |---|-------|--------|------|----|---|
@@ -337,6 +340,10 @@ SELECT * FROM EMPLOYEE WHERE ID IN (1, 2, 4, 5)
 |---|-------|--------|------|----|---|
 |5	|2	|2	|Anno	|80.0	|01-Feb-2012|
 |2	|1	|2	|Robo	|100.0	|01-Jan-2012|
+
+- __Intersect__ takes the result of both the queries and returns all rows that are common to both result sets.
+- Resultant data would have distinct rows as it removes duplicates
+- The number, order of the columns and data types must be the same in all queries for it to work
 
 ### 22. What are the differences among ROWNUM, RANK and DENSE_RANK?
 __ROW_NUMBER()__ is an analytical function which is used in conjunction to OVER() clause wherein we can specify ORDER BY and also PARTITION BY columns. It assigns contiguous, unique numbers from 1-N to a result set.
@@ -614,6 +621,8 @@ You can use a subquery in many places such as:
 - In the __SELECT__ clause
 - In the __Where__ clause
 
+- Subqueries return single or multiple rows of a single column which can be used in the where clause of outer query
+
 __SQL subquery with the EXISTS or NOT EXISTS operator__
 The __EXISTS__ operator checks for the existence of rows returned from the subquery. It returns true if the subquery contains any rows. Otherwise, it returns false.
 
@@ -827,6 +836,22 @@ SELECT AVG(total_spend) FROM t1
 
 ### 6. Can we do indexing if we have null values?
 
+### 7. Best practices for creating indexes?
+
+__Queries which are executed on a table decides what indexes should be created on the table.__
+
+- Prepare a list of all the queries which will be executed on a table. If your list contains mostly INSERT, DELETE, UPDATE or MERGE statement, it means nature of your project is OLTP and __try to avoid creating indexes.__
+- If it mostly contains a SELECT statement or has INSERT, DELETE, UPDATE or MERGE statement which performs the operation on a single row it means nature of your project is OLAP. we should create indexes on a table.
+- Sort your query list on the basis of the frequency of execution and query execution time. 
+- Build index on primary key column (clustered index)
+- Try to avoid creating single column indexes if the multi-column index is possible.
+- Don't create useless and low cardinality indexes.
+- Don't create duplicate indexes.
+
+### 8. How to create multi-column index?
+```CREATE INDEX NCI_a_b ON tblEmployee(a,b)```
+
+
 ----------------------------------------------------------------------------------------------------------------------------------------
 ## Stored Procedure, Functions and Triggers
 ***
@@ -1020,8 +1045,9 @@ From Publisher_info P
 Inner JOIN Consumption info C
 Where P.Video_id = C.Video_id
 ```
-----------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
 ## SQL Server Integration Sevices (SSIS)
+***
 
 ### 1. What is SSIS? What is it used for?
 It is a platform for building enterprise level data integration and data transformation solutions. It consists rich set of built-in tasks and transformation tools that are used for integrating packages

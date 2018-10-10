@@ -9,9 +9,9 @@ __Hdfs commands__
 	hadoop fs -cat location | wc -l
 	```
 
-- ``` hadoop fs -ls /user/folder``` : List files in HDFS directory
+- List files in HDFS directory:  ``` hadoop fs -ls /user/folder```
 
-- ``` hadoop fs -mkdir folder```: make a Directory in HDFS
+- Make a Directory in HDFS: ``` hadoop fs -mkdir folder```
 	
 - Show Jobs: ```hadoop job -list```, ``` mapred job -list```
 

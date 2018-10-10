@@ -16,7 +16,7 @@ If you do not start "beeline" you will be trying to access Hive Metastore and HD
 
 - To Show Tables ```hive> show tables;```
 
-- Drop Table ``` hive> drop table dw_table_count;```
+- Drop Table ``` hive> drop table table_name;```
 
 ## Script Execution
 
